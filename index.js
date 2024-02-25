@@ -5,6 +5,8 @@ require('dotenv').config()
 const token = process.env.BOT_TOKEN
 const tokenTwo = process.env.BOT_TOKEN_TWO
 
+const TELEGRAM_ID = process.env.TELEGRAM_ID
+
 const bot = new TelegramBot(token, {polling: true});
 const botTwo = new TelegramBot(tokenTwo, {polling: true});
 
@@ -27,18 +29,18 @@ ${text}`
     id: msg.from.id
   }
 
- botTwo.sendMessage(580241223, msgData)
+ botTwo.sendMessage(TELEGRAM_ID, msgData)
 });
 
 botTwo.on('message', msg => {
 
   if (msg.text === '/stats') {
-    botTwo.sendMessage(580241223, JSON.stringify(USERS, null, "\t"));
+    botTwo.sendMessage(TELEGRAM_ID, JSON.stringify(USERS, null, "\t"));
   }
 
   if (msg.text === '/count') {
     const number = Object.keys(USERS).length
 
-    botTwo.sendMessage(580241223, number);
+    botTwo.sendMessage(TELEGRAM_ID, number);
   }
 });
